@@ -9,7 +9,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: {{ .Values.todoapp.namespace }}
-  name: {{ .Chart.Name }}-secrets-reader
+  name: {{ .Values.todoapp.roleName }}
 rules:
 - apiGroups: [""]
   resources: ["secrets"]
@@ -19,12 +19,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: secrets-reader-binding
+  name: {{ .Values.todoapp.roleBinding.roleName }}
   namespace: {{ .Values.todoapp.namespace }}
 subjects:
 - kind: {{ .Values.todoapp.roleBinding.subjects.kind }}
   name: {{ .Values.todoapp.serviceAccountName }}
 roleRef:
   kind: {{ .Values.todoapp.roleBinding.roleRef.kind }}
-  name: {{ .Values.todoapp.serviceAccountName }}
+  name: {{ .Values.todoapp.roleName }}
   apiGroup: rbac.authorization.k8s.io

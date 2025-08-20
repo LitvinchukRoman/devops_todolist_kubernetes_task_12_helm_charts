@@ -48,7 +48,9 @@ todoapp:
       requests:
         storage: 1Gi
   serviceAccountName: todoapp-secrets-reader
+  roleName: todoapp-secrets-reader
   roleBinding:
+    roleName: secrets-reader-binding
     subjects:
         kind: ServiceAccount
     roleRef:
