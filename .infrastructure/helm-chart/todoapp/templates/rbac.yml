@@ -1,7 +1,7 @@
 kind: ServiceAccount
 apiVersion: v1
 metadata:
-  name: {{ .Chart.Name }}-secrets-reader
+  name: {{ .Values.todoapp.serviceAccountName }}
   namespace: {{ .Values.todoapp.namespace }}
 
 ---
@@ -22,9 +22,9 @@ metadata:
   name: secrets-reader-binding
   namespace: {{ .Values.todoapp.namespace }}
 subjects:
-- kind: ServiceAccount
-  name: {{ .Chart.Name }}-secrets-reader
+- kind: {{ .Values.todoapp.roleBinding.subjects.kind }}
+  name: {{ .Values.todoapp.serviceAccountName }}
 roleRef:
-  kind: Role
-  name: {{ .Chart.Name }}-secrets-reader
+  kind: {{ .Values.todoapp.roleBinding.roleRef.kind }}
+  name: {{ .Values.todoapp.serviceAccountName }}
   apiGroup: rbac.authorization.k8s.io

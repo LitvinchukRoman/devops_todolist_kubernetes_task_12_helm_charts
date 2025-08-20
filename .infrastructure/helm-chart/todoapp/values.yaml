@@ -47,4 +47,11 @@ todoapp:
     resources:
       requests:
         storage: 1Gi
+  serviceAccountName: todoapp-secrets-reader
+  roleBinding:
+    subjects:
+        kind: ServiceAccount
+    roleRef:
+      kind: Role
+
 
